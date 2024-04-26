@@ -248,19 +248,7 @@ export default function EchartsTimeseries({
       }
     },
   };
-  // if (echartOptions.series && echartOptions.series.length > 0) {
-  //   echartOptions.series.forEach(series => {
-  //     if (series.type === 'bar') {
-  //       // Adjust the value of barWidth as needed
-  //       series.barWidth = '50%'; // or you can provide a specific number, e.g., 20
-  //       series.label.fontSize=10; 
-  //       series.label.color="red";     
-  //     }
-  //   });
-  // }
-  
-
-
+ 
   return (
     <>
       <div ref={extraControlRef}>

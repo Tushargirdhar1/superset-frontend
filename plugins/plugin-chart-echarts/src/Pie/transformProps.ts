@@ -50,6 +50,7 @@ import { getDefaultTooltip } from '../utils/tooltip';
 import { Refs } from '../types';
 
 const percentFormatter = getNumberFormatter(NumberFormats.PERCENT_2_POINT);
+const themeMode = localStorage.getItem('themeMode') || 'light';
 
 export function formatPieLabel({
   params,
@@ -267,11 +268,20 @@ export default function transformProps(
       labelType,
     });
 
-  const defaultLabel = {
-    formatter,
-    show: showLabels,
-    color: theme.colors.grayscale.dark2,
-  };
+  let defaultLabel;
+  if (themeMode === 'dark') {
+    defaultLabel = {
+      formatter,
+      show: showLabels,
+      color: theme.colors.grayscale.light5,
+    };
+  } else{
+    defaultLabel = {
+      formatter,
+      show: showLabels,
+      color: theme.colors.grayscale.dark2,
+    };
+  }
 
   const chartPadding = getChartPadding(
     showLegend,
@@ -330,6 +340,9 @@ export default function transformProps(
     legend: {
       ...getLegendProps(legendType, legendOrientation, showLegend, theme),
       data: keys,
+      textStyle: {
+        color: themeMode === 'dark' ? '#FFFFFF' : '#000000', // Set legend text color based on themeMode
+      },
     },
     graphic: showTotal
       ? {

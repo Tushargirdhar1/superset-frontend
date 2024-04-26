@@ -57,7 +57,7 @@ export const SupersetListViewCard = ({
   <ListViewCard
     title="Superset Card Title"
     loading={loading}
-    url="/superset/dashboard/births/"
+    url="/vyakriti/dashboard/births/"
     imgURL={imgURL}
     imgFallbackURL={imgFallbackURL}
     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."

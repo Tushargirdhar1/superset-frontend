@@ -226,6 +226,9 @@ export default function transformProps(
     xAxis: xAxisName,
     metric: metricLabel,
   });
+  const themeMode = localStorage.getItem('themeMode') || 'light';
+  const isDarkTheme = themeMode === 'dark';
+  const blackThemeColor = isDarkTheme ? '#ffffff' : '#000000'; 
 
   const assistData: ISeriesData[] = [];
   const increaseData: ISeriesData[] = [];
@@ -389,6 +392,7 @@ export default function transformProps(
         show: showValue,
         position: 'top',
         formatter: seriesformatter,
+        color:blackThemeColor,
       },
       itemStyle: {
         color: rgbToHex(increaseColor.r, increaseColor.g, increaseColor.b),
@@ -402,6 +406,7 @@ export default function transformProps(
         show: showValue,
         position: 'bottom',
         formatter: seriesformatter,
+        color:blackThemeColor,
       },
       itemStyle: {
         color: rgbToHex(decreaseColor.r, decreaseColor.g, decreaseColor.b),
@@ -415,6 +420,7 @@ export default function transformProps(
         show: showValue,
         position: 'top',
         formatter: seriesformatter,
+        color:blackThemeColor,
       },
       itemStyle: {
         color: rgbToHex(totalColor.r, totalColor.g, totalColor.b),
@@ -435,6 +441,9 @@ export default function transformProps(
       show: showLegend,
       selected: legendState,
       data: [LEGEND.INCREASE, LEGEND.DECREASE, LEGEND.TOTAL],
+      textStyle: {
+        color: blackThemeColor, // Set legend text color
+      },
     },
     xAxis: {
       data: xAxisData,
@@ -444,7 +453,10 @@ export default function transformProps(
         padding: [theme.gridUnit * 4, 0, 0, 0],
       },
       nameLocation: 'middle',
-      axisLabel,
+      axisLabel: { formatter:xAxisFormatter, color:blackThemeColor },
+      // splitLine: {
+      //   show: false,  // Ensure splitLine is set to false for yAxis
+      // },
     },
     yAxis: {
       ...defaultYAxis,
@@ -454,7 +466,10 @@ export default function transformProps(
       },
       nameLocation: 'middle',
       name: yAxisLabel,
-      axisLabel: { formatter: defaultFormatter },
+      axisLabel: { formatter: defaultFormatter,color:blackThemeColor },
+      // splitLine: {
+      //   show: false,  // Ensure splitLine is set to false for yAxis
+      // },
     },
     tooltip: {
       ...getDefaultTooltip(refs),

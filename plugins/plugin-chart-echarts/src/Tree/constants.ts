@@ -18,16 +18,20 @@
  */
 import { TreeSeriesOption } from 'echarts';
 import { EchartsTreeFormData } from './types';
+const themeMode = localStorage.getItem('themeMode') || 'light';
+const isDarkTheme = themeMode === 'dark';
+const blackThemeColor = isDarkTheme ? '#ffffff' : '#000000'; 
 
 export const DEFAULT_TREE_SERIES_OPTION: TreeSeriesOption = {
   label: {
     position: 'left',
     fontSize: 15,
+    color: blackThemeColor,
   },
   animation: true,
   animationDuration: 500,
   animationEasing: 'cubicOut',
-  lineStyle: { color: 'source', width: 1.5 },
+  lineStyle: { color: blackThemeColor, width: 1.5 },
 };
 
 export const DEFAULT_FORM_DATA: Partial<EchartsTreeFormData> = {

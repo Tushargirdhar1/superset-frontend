@@ -90,6 +90,10 @@ const calculateMin = (data: GaugeDataItemOption[]) =>
 const calculateMax = (data: GaugeDataItemOption[]) =>
   2 * Math.max(...data.map(d => d.value as number).concat([0]));
 
+const themeMode = localStorage.getItem('themeMode') || 'light';
+const isDarkTheme = themeMode === 'dark';
+const blackThemeColor = isDarkTheme ? '#ffffff' : '#000000';
+
 export default function transformProps(
   chartProps: EchartsGaugeChartProps,
 ): GaugeChartTransformedProps {
@@ -269,7 +273,7 @@ export default function transformProps(
     distance: -axisLabelDistance,
     fontSize,
     formatter: numberFormatter,
-    color: gaugeSeriesOptions.axisLabel?.color,
+    color: blackThemeColor,
   };
   const axisTick = {
     show: showAxisTick,
@@ -296,7 +300,7 @@ export default function transformProps(
       INTERVAL_GAUGE_SERIES_OPTION.splitLine?.lineStyle?.color;
     axisTick.lineStyle.color = INTERVAL_GAUGE_SERIES_OPTION?.axisTick?.lineStyle
       ?.color as string;
-    axisLabel.color = INTERVAL_GAUGE_SERIES_OPTION.axisLabel?.color;
+    axisLabel.color = blackThemeColor;
     axisLine.lineStyle.color = intervalBoundsAndColors;
     pointer = {
       show: showPointer,

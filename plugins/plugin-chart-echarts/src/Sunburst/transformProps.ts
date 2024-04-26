@@ -335,7 +335,7 @@ export default function transformProps(
       }
       return item;
     });
-
+  const themeMode = localStorage.getItem('themeMode') || 'light';
   const echartOptions: EChartsCoreOption = {
     grid: {
       ...defaultGrid,
@@ -371,7 +371,7 @@ export default function transformProps(
           width: (radius * 0.6) / (columns.length || 1),
           show: showLabels,
           formatter,
-          color: theme.colors.error.base,
+          color: theme.colors.grayscale.dark2,
           minAngle: minShowLabelAngle,
           overflow: 'breakAll',
         },
@@ -388,6 +388,7 @@ export default function transformProps(
             text: t('Total: %s', primaryValueFormatter(totalValue)),
             fontSize: 16,
             fontWeight: 'bold',
+            fill: themeMode === 'dark' ? '#FFFFFF' : '#000000', 
           },
           z: 10,
         }

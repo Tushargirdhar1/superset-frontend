@@ -144,6 +144,9 @@ export default function transformProps(
     ...getColtypesMapping(queriesData[0]),
     ...getColtypesMapping(queriesData[1]),
   };
+  const themeMode = localStorage.getItem('themeMode') || 'light';
+  const isDarkTheme = themeMode === 'dark';
+  const blackThemeColor = isDarkTheme ? '#ffffff' : '#000000'; 
   const {
     area,
     areaB,
@@ -505,6 +508,7 @@ export default function transformProps(
       axisLabel: {
         formatter: xAxisFormatter,
         rotate: xAxisLabelRotation,
+        color: blackThemeColor,
       },
       minorTick: { show: minorTicks },
       minInterval:
@@ -538,6 +542,7 @@ export default function transformProps(
             formatter,
             yAxisFormat,
           ),
+          color: blackThemeColor,
         },
         scale: truncateYAxis,
         name: yAxisTitle,
@@ -643,6 +648,9 @@ export default function transformProps(
         )
         .map(entry => entry.name || '')
         .concat(extractAnnotationLabels(annotationLayers, annotationData)),
+      textStyle: {
+          color: blackThemeColor, // Set legend text color
+        },
     },
     series: dedupSeries(series),
     toolbox: {

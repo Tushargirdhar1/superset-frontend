@@ -226,6 +226,7 @@ export default function transformProps(
       data: transformedData,
     },
   ];
+  const themeMode = localStorage.getItem('themeMode') || 'light';
 
   const echartOptions: EChartsCoreOption = {
     grid: {
@@ -239,6 +240,9 @@ export default function transformProps(
     legend: {
       ...getLegendProps(legendType, legendOrientation, showLegend, theme),
       data: Array.from(columnsLabelMap.keys()),
+      textStyle: {
+        color: themeMode === 'dark' ? '#FFFFFF' : '#000000', // Set legend text color based on themeMode
+      },
     },
     series,
     radar: {

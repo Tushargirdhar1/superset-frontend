@@ -63,7 +63,7 @@ const StyledCrossLinks = styled.div`
 export default function CrossLinks({
   crossLinks,
   maxLinks = 20,
-  linkPrefix = '/superset/dashboard/',
+  linkPrefix = '/vyakriti/dashboard/',
 }: CrossLinksProps) {
   const crossLinksRef = useRef<HTMLDivElement>(null);
   const plusRef = useRef<HTMLDivElement>(null);

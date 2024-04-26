@@ -148,13 +148,6 @@ export default function EchartsSunburst(props: SunburstTransformedProps) {
       }
     },
   };
-  if (echartOptions.series && echartOptions.series.length > 0) {
-    echartOptions.series.forEach(series => {
-      if (series.type === 'sunburst') {
-        series.radius = ['30%', '100%']; // Adjust the values as needed
-      }
-    });
-  }
   return (
     <Echart
       refs={refs}

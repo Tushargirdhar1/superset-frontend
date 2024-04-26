@@ -17,6 +17,9 @@
  * under the License.
  */
 import { GraphSeriesOption } from 'echarts';
+const themeMode = localStorage.getItem('themeMode') || 'light';
+const isDarkTheme = themeMode === 'dark';
+const blackThemeColor = isDarkTheme ? '#ffffff' : '#000000'; 
 
 export const DEFAULT_GRAPH_SERIES_OPTION: GraphSeriesOption = {
   zoom: 0.7,
@@ -38,6 +41,7 @@ export const DEFAULT_GRAPH_SERIES_OPTION: GraphSeriesOption = {
     padding: [0, 0, 0, 0],
     overflow: 'truncate',
     formatter: '{b}',
+    color:blackThemeColor,
   },
   emphasis: {
     focus: 'adjacency',

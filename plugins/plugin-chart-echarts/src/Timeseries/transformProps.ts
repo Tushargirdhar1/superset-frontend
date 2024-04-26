@@ -450,17 +450,11 @@ export default function transformProps(
     )
     .map(entry => entry.name || '')
     .concat(extractAnnotationLabels(annotationLayers, annotationData));
-  const themeMode = localStorage.getItem('themeMode') || 'light';
-  const labelColor = themeMode === 'dark' ? '#ffffff' : '#333333'; 
-  const updatedLabelMap = Object.entries(label_map).reduce((acc, entry) => {
-    const [labelKey, labelValues] = entry;
-    const updatedValues = labelValues.map(value => ({
-      label: value,
-      color: labelColor, // Apply the determined label color
-    }));
-    return { ...acc, [labelKey]: updatedValues };
-  }, {});
   
+  const themeMode = localStorage.getItem('themeMode') || 'light';
+  const isDarkTheme = themeMode === 'dark';
+  const blackThemeColor = isDarkTheme ? '#ffffff' : '#000000'; 
+ 
   let xAxis: any = {
     type: xAxisType,
     name: xAxisTitle,
@@ -470,6 +464,7 @@ export default function transformProps(
       hideOverlap: true,
       formatter: xAxisFormatter,
       rotate: xAxisLabelRotation,
+      color:blackThemeColor,
     },
     splitLine: {
       show: false
@@ -503,6 +498,7 @@ export default function transformProps(
         defaultFormatter,
         yAxisFormat,
       ),
+      color:blackThemeColor,
     },
     splitLine: {
       show: false
@@ -585,6 +581,9 @@ export default function transformProps(
         legendState,
       ),
       data: legendData as string[],
+      textStyle: {
+        color: blackThemeColor, // Set legend text color
+      },
     },
     series: dedupSeries(series),
     toolbox: {
@@ -616,19 +615,19 @@ export default function transformProps(
   const onFocusedSeries = (seriesName: string | null) => {
     focusedSeries = seriesName;
   };
-  if (echartOptions.series && echartOptions.series.length > 0) {
-    echartOptions.series.forEach(series => {
-      if (series.type === 'bar') {
-        // Adjust barWidth and label properties based on theme mode
-        series.barWidth = themeMode === 'dark' ? '50%' : '20%'; // Example widths based on theme
-        series.label = {
-          ...series.label,
-          fontSize: themeMode === 'dark' ? 10 : 12, // Adjust fontSize based on theme
-          color: themeMode === 'dark' ? 'red' : '#333333', // Adjust label color based on theme
-        };
-      }
-    });
-  }
+  // if (echartOptions.series && echartOptions.series.length > 0) {
+  //   echartOptions.series.forEach(series => {
+  //     if (series.type === 'bar') {
+  //       // Adjust barWidth and label properties based on theme mode
+  //       // series.barWidth = themeMode === 'dark' ? '50%' : '20%'; // Example widths based on theme
+  //       series.label = {
+  //         ...series.label,
+  //         // fontSize: themeMode === 'dark' ? 10 : 12, // Adjust fontSize based on theme
+  //         color: themeMode === 'dark' ? 'white' : '#333333', // Adjust label color based on theme
+  //       };
+  //     }
+  //   });
+  // }
 
   return {
     echartOptions,

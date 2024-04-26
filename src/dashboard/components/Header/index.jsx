@@ -62,6 +62,7 @@ import { Switch } from 'antd';
 import { CssEditor as AceCssEditor } from 'src/components/AsyncAceEditor';
 import { Menu } from 'src/components/Menu';
 import { template } from 'lodash';
+import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons';
 
 const extensionsRegistry = getExtensionsRegistry();
 
@@ -484,30 +485,199 @@ class Header extends React.PureComponent {
     `;
 
   const darkStyles = `
-    h2 {
-      color: white;
-      font-size: 52px;
-    }
-    .navbar {
-      box-shadow: none;
-      transition: opacity 0.5s ease;
-      opacity: 0.05;
-    }
-    .navbar:hover {
-      opacity: 1;
-    }
-    .chart-header .header {
-      font-weight: normal;
-      font-size: 12px;
-    }
-    .nvd3 text {
-      font-size: 12px;
-      font-family: inherit;
-    }
-    body {
-      background: #000;
-      font-family: Courier, Monaco, monospace;
-    }
+  body {
+    background-color:#181515 !important;
+   }
+   
+   #app {
+    background-color:#181515 !important;
+   }
+   
+   .css-1rq9nng .css-h8dzev .pvtTable {
+   background-color:#181515 !important;
+   }
+   
+   
+   ul.ant-menu.ant-menu-light.main-nav.css-188dvs4.ant-menu-root.ant-menu-horizontal {
+     background-color: #181515;
+   }
+   
+   div.ant-col.ant-col-xs-24.ant-col-md-8 {
+   background-color: #181515;
+   }
+   
+   div.ant-menu-submenu-title {
+     background-color: #181515;
+   }
+   
+   
+   li.ant-menu-submenu.ant-menu-submenu-horizontal.css-d1dar4 {
+     background-color: #181515;
+   }
+   
+   .ant-tabs-content-holder * {
+     color: #fff !important;
+     }
+   .dashboard-content{
+    background-color:#181515;
+   }
+   
+   .header-with-actions {
+       background-color: #bb86fc;
+       color: #ffffff;
+      }
+   
+   --.dragdroppable-column {
+    background-color:#181515;
+       color: white;
+   }
+   
+   .css-o9kagx div .css-1dgvt7y {
+   background-color:#181515;
+   }
+   
+   div.ant-tabs-nav-wrap {
+    background-color:#181515;
+    color: #ffffff;
+   }
+   
+   div.ant-select-selector {
+      background-image: linear-gradient(-45deg, #2f2f2f, #202020);
+      border-style:none;
+   }
+   
+   .dashboard-component {
+       background-image: linear-gradient(-45deg, #2f2f2f, #202020);
+       color:white;
+      }
+   
+   .dashboard-component-header {
+      background-image: linear-gradient(-45deg, #2f2f2f, #202020);
+       color:white;
+      }
+     
+   .ant-tabs-content-holder * {
+     color: #fff !important;
+     }
+   
+   .main-nav .ant-menu-item a {
+   color: #ffffff;
+   }
+   
+   
+   #main-menu .ant-menu-submenu:nth-child(4) .ant-menu-submenu-title
+   {
+    color: #ffffff;
+   }
+   
+   #main-menu .ant-menu-submenu:nth-child(8) .ant-menu-submenu-title {
+   color: #ffffff;
+   }
+   
+   .css-1ihx2le .css-yk4l29 .superset-button{
+    color:#fff;
+   }
+   
+   .ant-tabs-content-holder{
+    backgrount-color:#000000;
+   }
+   .css-1x85xji .superset-button .ant-badge-count{
+     color:#000;
+   }
+   .css-1bzexgi{
+    background:#000000;
+   }
+   .ant-dropdown-button .ant-btn svg{
+     color:#bb86fc;
+   }
+   
+   h4.css-vqun1m {
+     color: #bb86fc;
+   }
+   
+   .ant-tabs-tab-active *{
+     color: #bb86fc;
+   }
+   
+   #TABS-JwrXIgKDLS .ant-tabs-nav .dragdroppable-tab{
+    color:#fff;
+   } 
+   
+   
+   div.css-14381v7 {
+   background-color:#181515;
+   }
+   
+   div.css-1pf7rkh {
+   background-image: linear-gradient(-45deg, #2f2f2f, #202020);
+     color:white;
+   }
+   
+   
+   
+   div.css-1uyj2ql {
+   background-image: linear-gradient(-45deg, #2f2f2f, #202020);
+     color:white;
+   }
+   
+   
+   
+   .css-1a2qin2 .css-18fkq2l {
+     background-color:#181515;
+   }
+   
+   
+   .css-1a2qin2 .open .open
+   {
+     background-color:#181515;
+       color:white;
+   
+   }
+   
+   .css-wlt4i6 div .ant-select-selector {
+   background-image: linear-gradient(-45deg, #2f2f2f, #202020);
+   }
+   
+   .css-1a2qin2 .css-lmih2o {
+     background-color:#181515;
+       color:white;
+   
+   }
+   
+   .css-wlt4i6 div:nth-child(1) .ant-form-vertical div .ant-form-item .ant-form-item-label label .css-r97my h4
+   {    color:white;
+   }
+   
+   
+   h4.css-17r6vwm {
+     color: #fff;
+     
+   }
+   
+   .css-1a2qin2 .css-14gj75u{
+     background-color:#181515;
+       color:white;
+   }
+   
+   
+   .css-slbic0 .superset-button span{
+         color:white;
+   }
+   
+   
+   .css-3se2ft .css-1x85xji .superset-button
+   {
+       background-color:#FFDE9E;
+   }
+   
+   
+   div.grid-row.background--transparent.css-13133f7 {
+   background-color:#181515;
+   }
+   
+   .css-1rq9nng .css-h8dzev .pvtTable {
+   background-color:#181515 !important;
+   }   
   `;
   const selectedStyles = mode === 'dark' ? darkStyles : lightStyles;
   let styleElement = document.getElementById('theme-styles');
@@ -728,9 +898,9 @@ class Header extends React.PureComponent {
                 />
               ) : (
                 <div css={actionButtonsStyle}>
-                  <button onClick={this.toggleFullScreen}>
-                    {this.state.isFullScreen ? 'Exit Full Screen' : 'Enter Full Screen'}
-                  </button>
+                  {this.state.isFullScreen ? <FullscreenExitOutlined onClick={this.toggleFullScreen} />:<FullscreenOutlined onClick={this.toggleFullScreen} />}
+                    {/* { ? 'Exit Full Screen' : 'Enter Full Screen'}
+                  </FullscreenOutlined> */}
                   <Switch
                   onChange={(value) => {
                     const themeMode = value ? 'dark' : 'light';
@@ -738,9 +908,9 @@ class Header extends React.PureComponent {
                     console.log(themeMode,"themeMode");
                   }}
                   
-                  checkedChildren="Dark Mode"
-                  unCheckedChildren="Light Mode"
-                  style={{ marginRight: 10 }}
+                  checkedChildren="🌙"
+                  unCheckedChildren="☀️"
+                  style={{ marginRight: 20, marginLeft: 20 }}
                   checked={this.state.themeMode === 'dark'}
                 />
 
