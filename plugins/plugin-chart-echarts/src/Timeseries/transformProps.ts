@@ -466,9 +466,9 @@ export default function transformProps(
       rotate: xAxisLabelRotation,
       color:blackThemeColor,
     },
-    splitLine: {
-      show: false
-   },
+  //   splitLine: {
+  //     show: false
+  //  },
     minorTick: { show: minorTicks },
     minInterval:
       xAxisType === AxisType.Time && timeGrainSqla
@@ -500,9 +500,9 @@ export default function transformProps(
       ),
       color:blackThemeColor,
     },
-    splitLine: {
-      show: false
-   },
+  //   splitLine: {
+  //     show: false
+  //  },
     scale: truncateYAxis,
     name: yAxisTitle,
     nameGap: convertInteger(yAxisTitleMargin),
@@ -514,6 +514,10 @@ export default function transformProps(
     [padding.bottom, padding.left] = [padding.left, padding.bottom];
     yAxis.inverse = true;
   }
+  if (seriesType === 'bar' || seriesType === 'line') {
+    xAxis.splitLine = { show: false };
+    yAxis.splitLine = { show: false };
+  }  
 
   const echartOptions: EChartsCoreOption = {
     useUTC: true,

@@ -59,10 +59,10 @@ import { PageHeaderWithActions } from 'src/components/PageHeaderWithActions';
 import DashboardEmbedModal from '../EmbeddedModal';
 import OverwriteConfirm from '../OverwriteConfirm';
 import { Switch } from 'antd';
-import { CssEditor as AceCssEditor } from 'src/components/AsyncAceEditor';
 import { Menu } from 'src/components/Menu';
 import { template } from 'lodash';
 import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons';
+import ToggleThemeSwitch from '../ToggleThemeSwitch';
 
 const extensionsRegistry = getExtensionsRegistry();
 
@@ -191,8 +191,7 @@ class Header extends React.PureComponent {
       emphasizeRedo: false,
       showingPropertiesModal: false,
       isDropdownVisible: false,
-      templates:[],
-      themeMode: localStorage.getItem('themeMode') || 'light',
+      templates: [],
       isFullScreen: false,
     };
 
@@ -207,7 +206,7 @@ class Header extends React.PureComponent {
     this.hidePropertiesModal = this.hidePropertiesModal.bind(this);
     this.setIsDropdownVisible = this.setIsDropdownVisible.bind(this);
   }
-  
+
   componentDidMount() {
     const { refreshFrequency } = this.props;
     this.startPeriodicRender(refreshFrequency * 1000);
@@ -220,23 +219,6 @@ class Header extends React.PureComponent {
     }
   }
 
-  componentDidMount() {
-    const savedThemeMode = localStorage.getItem('themeMode');
-    console.log(savedThemeMode, "saved theme mode");
-  
-    if (savedThemeMode) {
-      this.setState({ themeMode: savedThemeMode }, () => {
-        console.log(this.state.themeMode, "updated theme mode"); // Confirm updated theme mode in state
-        this.applyThemeStyles(savedThemeMode);
-        console.log("Theme styles applied successfully");
-      });
-    } else {
-      // Default theme mode if not found in localStorage
-      this.applyThemeStyles(this.state.themeMode);
-      console.log("Default theme styles applied");
-    }
-  }
-  
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       UNDO_LIMIT - nextProps.undoLength <= 0 &&
@@ -460,234 +442,7 @@ class Header extends React.PureComponent {
   hideEmbedModal = () => {
     this.setState({ showingEmbedModal: false });
   };
-     
-  setThemeMode = (mode) => {
-    localStorage.setItem('themeMode', mode);
-    this.setState({ themeMode: mode }, () => {
-      this.applyThemeStyles(mode);
-    });
-  };
-  
-  applyThemeStyles = (mode) => {
-    // Define your CSS styles for light and dark themes
-    const lightStyles = `
-      .navbar {
-        transition: opacity 0.5s ease;
-        opacity: 0.05;
-      }
-      .navbar:hover {
-        opacity: 1;
-      }
-      .chart-header .header {
-        font-weight: normal;
-        font-size: 12px;
-      }
-    `;
 
-  const darkStyles = `
-  body {
-    background-color:#181515 !important;
-   }
-   
-   #app {
-    background-color:#181515 !important;
-   }
-   
-   .css-1rq9nng .css-h8dzev .pvtTable {
-   background-color:#181515 !important;
-   }
-   
-   
-   ul.ant-menu.ant-menu-light.main-nav.css-188dvs4.ant-menu-root.ant-menu-horizontal {
-     background-color: #181515;
-   }
-   
-   div.ant-col.ant-col-xs-24.ant-col-md-8 {
-   background-color: #181515;
-   }
-   
-   div.ant-menu-submenu-title {
-     background-color: #181515;
-   }
-   
-   
-   li.ant-menu-submenu.ant-menu-submenu-horizontal.css-d1dar4 {
-     background-color: #181515;
-   }
-   
-   .ant-tabs-content-holder * {
-     color: #fff !important;
-     }
-   .dashboard-content{
-    background-color:#181515;
-   }
-   
-   .header-with-actions {
-       background-color: #bb86fc;
-       color: #ffffff;
-      }
-   
-   --.dragdroppable-column {
-    background-color:#181515;
-       color: white;
-   }
-   
-   .css-o9kagx div .css-1dgvt7y {
-   background-color:#181515;
-   }
-   
-   div.ant-tabs-nav-wrap {
-    background-color:#181515;
-    color: #ffffff;
-   }
-   
-   div.ant-select-selector {
-      background-image: linear-gradient(-45deg, #2f2f2f, #202020);
-      border-style:none;
-   }
-   
-   .dashboard-component {
-       background-image: linear-gradient(-45deg, #2f2f2f, #202020);
-       color:white;
-      }
-   
-   .dashboard-component-header {
-      background-image: linear-gradient(-45deg, #2f2f2f, #202020);
-       color:white;
-      }
-     
-   .ant-tabs-content-holder * {
-     color: #fff !important;
-     }
-   
-   .main-nav .ant-menu-item a {
-   color: #ffffff;
-   }
-   
-   
-   #main-menu .ant-menu-submenu:nth-child(4) .ant-menu-submenu-title
-   {
-    color: #ffffff;
-   }
-   
-   #main-menu .ant-menu-submenu:nth-child(8) .ant-menu-submenu-title {
-   color: #ffffff;
-   }
-   
-   .css-1ihx2le .css-yk4l29 .superset-button{
-    color:#fff;
-   }
-   
-   .ant-tabs-content-holder{
-    backgrount-color:#000000;
-   }
-   .css-1x85xji .superset-button .ant-badge-count{
-     color:#000;
-   }
-   .css-1bzexgi{
-    background:#000000;
-   }
-   .ant-dropdown-button .ant-btn svg{
-     color:#bb86fc;
-   }
-   
-   h4.css-vqun1m {
-     color: #bb86fc;
-   }
-   
-   .ant-tabs-tab-active *{
-     color: #bb86fc;
-   }
-   
-   #TABS-JwrXIgKDLS .ant-tabs-nav .dragdroppable-tab{
-    color:#fff;
-   } 
-   
-   
-   div.css-14381v7 {
-   background-color:#181515;
-   }
-   
-   div.css-1pf7rkh {
-   background-image: linear-gradient(-45deg, #2f2f2f, #202020);
-     color:white;
-   }
-   
-   
-   
-   div.css-1uyj2ql {
-   background-image: linear-gradient(-45deg, #2f2f2f, #202020);
-     color:white;
-   }
-   
-   
-   
-   .css-1a2qin2 .css-18fkq2l {
-     background-color:#181515;
-   }
-   
-   
-   .css-1a2qin2 .open .open
-   {
-     background-color:#181515;
-       color:white;
-   
-   }
-   
-   .css-wlt4i6 div .ant-select-selector {
-   background-image: linear-gradient(-45deg, #2f2f2f, #202020);
-   }
-   
-   .css-1a2qin2 .css-lmih2o {
-     background-color:#181515;
-       color:white;
-   
-   }
-   
-   .css-wlt4i6 div:nth-child(1) .ant-form-vertical div .ant-form-item .ant-form-item-label label .css-r97my h4
-   {    color:white;
-   }
-   
-   
-   h4.css-17r6vwm {
-     color: #fff;
-     
-   }
-   
-   .css-1a2qin2 .css-14gj75u{
-     background-color:#181515;
-       color:white;
-   }
-   
-   
-   .css-slbic0 .superset-button span{
-         color:white;
-   }
-   
-   
-   .css-3se2ft .css-1x85xji .superset-button
-   {
-       background-color:#FFDE9E;
-   }
-   
-   
-   div.grid-row.background--transparent.css-13133f7 {
-   background-color:#181515;
-   }
-   
-   .css-1rq9nng .css-h8dzev .pvtTable {
-   background-color:#181515 !important;
-   }   
-  `;
-  const selectedStyles = mode === 'dark' ? darkStyles : lightStyles;
-  let styleElement = document.getElementById('theme-styles');
-    if (!styleElement) {
-      styleElement = document.createElement('style');
-      styleElement.setAttribute('id', 'theme-styles');
-      document.head.appendChild(styleElement);
-    }
-    styleElement.innerHTML = selectedStyles;
-  };
   toggleFullScreen = () => {
     const { isFullScreen } = this.state;
     const element = document.documentElement;
@@ -743,7 +498,7 @@ class Header extends React.PureComponent {
       lastModifiedTime,
       logEvent,
     } = this.props;
-    
+
 
     const userCanEdit =
       dashboardInfo.dash_edit_perm && !dashboardInfo.is_managed_externally;
@@ -898,34 +653,23 @@ class Header extends React.PureComponent {
                 />
               ) : (
                 <div css={actionButtonsStyle}>
-                  {this.state.isFullScreen ? <FullscreenExitOutlined onClick={this.toggleFullScreen} />:<FullscreenOutlined onClick={this.toggleFullScreen} />}
-                    {/* { ? 'Exit Full Screen' : 'Enter Full Screen'}
+                  {this.state.isFullScreen ? <FullscreenExitOutlined onClick={this.toggleFullScreen} /> : <FullscreenOutlined onClick={this.toggleFullScreen} />}
+                  {/* { ? 'Exit Full Screen' : 'Enter Full Screen'}
                   </FullscreenOutlined> */}
-                  <Switch
-                  onChange={(value) => {
-                    const themeMode = value ? 'dark' : 'light';
-                    this.setThemeMode(themeMode);
-                    console.log(themeMode,"themeMode");
-                  }}
-                  
-                  checkedChildren="🌙"
-                  unCheckedChildren="☀️"
-                  style={{ marginRight: 20, marginLeft: 20 }}
-                  checked={this.state.themeMode === 'dark'}
-                />
+                  <ToggleThemeSwitch />
 
                   {NavExtension && <NavExtension />}
                   {userCanEdit && (
                     <Button
-                    buttonStyle="secondary"
-                    onClick={this.toggleEditMode}
-                    data-test="edit-dashboard-button"
-                    className="action-button"
-                    css={editButtonStyle}
-                    aria-label={t('Edit dashboard')}
-                  >
-                    {t('Edit dashboard')}
-                  </Button>
+                      buttonStyle="secondary"
+                      onClick={this.toggleEditMode}
+                      data-test="edit-dashboard-button"
+                      className="action-button"
+                      css={editButtonStyle}
+                      aria-label={t('Edit dashboard')}
+                    >
+                      {t('Edit dashboard')}
+                    </Button>
                   )}
                 </div>
               )}

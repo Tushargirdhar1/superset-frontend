@@ -119,7 +119,8 @@ export default function transformProps(
     });
 
   const metricLabels = metrics.map(getMetricLabel);
-  const groupbyLabels = groupby.map(getColumnLabel);
+  const groupbyLabels = groupby.map(getColumnLabel); 
+  const themeMode = localStorage.getItem('themeMode') || 'light';
 
   const metricLabelAndMaxValueMap = new Map<string, number>();
   const columnsLabelMap = new Map<string, string[]>();
@@ -179,6 +180,7 @@ export default function transformProps(
         show: showLabels,
         position: labelPosition,
         formatter,
+        color:themeMode === 'dark' ? '#FFFFFF' : '#000000', 
       },
     } as RadarSeriesDataItemOption);
   });
@@ -226,7 +228,6 @@ export default function transformProps(
       data: transformedData,
     },
   ];
-  const themeMode = localStorage.getItem('themeMode') || 'light';
 
   const echartOptions: EChartsCoreOption = {
     grid: {
@@ -250,7 +251,6 @@ export default function transformProps(
       indicator,
     },
   };
-
   return {
     formData,
     width,
