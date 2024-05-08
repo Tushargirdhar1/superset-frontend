@@ -493,6 +493,7 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
         <DrillDetailMenuItems
           chartId={slice.slice_id}
           formData={props.formData}
+          onIcon={false}
         />
       )}
 
@@ -521,12 +522,12 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
           >
             {t('Export to .CSV')}
           </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
             key={MENU_KEYS.EXPORT_XLSX}
             icon={<Icons.FileOutlined css={dropdownIconsStyles} />}
           >
             {t('Export to Excel')}
-          </Menu.Item>
+          </Menu.Item> */}
 
           {isFeatureEnabled(FeatureFlag.AllowFullCsvExport) &&
             props.supersetCanCSV &&
@@ -568,6 +569,14 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
           }}
         />
       )}
+      {isFeatureEnabled(FeatureFlag.DrillToDetail) && canDrillToDetail && (
+        <DrillDetailMenuItems
+          chartId={slice.slice_id}
+          formData={props.formData}
+          onIcon={true}
+        />
+      )}
+      
       <NoAnimationDropdown
         overlay={menu}
         overlayStyle={dropdownOverlayStyle}

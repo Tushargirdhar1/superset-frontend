@@ -37,6 +37,8 @@ import DrillDetailModal from './DrillDetailModal';
 import { getSubmenuYOffset } from '../utils';
 import { MenuItemTooltip } from '../DisabledMenuItemTooltip';
 import { MenuItemWithTruncation } from '../MenuItemWithTruncation';
+import { DeliveredProcedureOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd';
 
 const DRILL_TO_DETAIL = t('Drill to detail');
 const DRILL_TO_DETAIL_BY = t('Drill to detail by');
@@ -98,10 +100,12 @@ export type DrillDetailMenuItemsProps = {
   onSelection?: () => void;
   onClick?: (event: MouseEvent) => void;
   submenuIndex?: number;
+  onIcon?: boolean;
 };
 
 const DrillDetailMenuItems = ({
   chartId,
+  onIcon,
   formData,
   filters = [],
   isContextMenu = false,
@@ -187,13 +191,28 @@ const DrillDetailMenuItems = ({
       <MenuItemTooltip title={drillDisabled} />
     </DisabledMenuItem>
   ) : (
-    <Menu.Item
-      {...props}
-      key="drill-to-detail"
-      onClick={openModal.bind(null, [])}
-    >
-      {DRILL_TO_DETAIL}
-    </Menu.Item>
+    <>
+      { onIcon ? (
+      <Tooltip title="Drill to Detail">
+        <DeliveredProcedureOutlined
+          onClick={openModal.bind(null, [])}
+          style={{
+            fontSize: 18,
+            marginLeft: 20,
+            cursor: 'pointer',
+          }}
+        />
+      </Tooltip>
+      ):
+        <Menu.Item
+          {...props}
+          key="drill-to-detail"
+          onClick={openModal.bind(null, [])}
+        >
+          {DRILL_TO_DETAIL}
+        </Menu.Item>
+      }
+    </>
   );
 
   const drillToDetailByMenuItem = drillByDisabled ? (

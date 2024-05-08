@@ -22,10 +22,12 @@ class ToggleThemeSwitch extends Component {
   }
 
   setThemeMode = (mode) => {
+    const { forceRefreshAllCharts } = this.props;
     localStorage.setItem('themeMode', mode);
     this.setState({ themeMode: mode }, () => {
       this.applyThemeStyles(mode);
-      window.location.reload();
+      // window.location.reload();
+      forceRefreshAllCharts()
     });
   };
 
@@ -46,7 +48,10 @@ class ToggleThemeSwitch extends Component {
       
    .ant-tabs-nav-list {
        background-color: #f1f1f1 !important;
-    }  
+    } 
+    .grid-content .dragdroppable-row .dragdroppable-column .dashboard-component-chart-holder {
+    box-shadow: 0px 6px 6px #C7C8CC;
+    }
         `;
 
     const darkStyles = `
@@ -312,7 +317,7 @@ body {
  }
  .css-nxtj6w .dot {
      background-color: white;
- }    
+ }
       `;
     const selectedStyles = mode === 'dark' ? darkStyles : lightStyles;
     let styleElement = document.getElementById('theme-styles');

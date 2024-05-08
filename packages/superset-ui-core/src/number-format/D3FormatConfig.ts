@@ -22,5 +22,5 @@ export const DEFAULT_D3_FORMAT: FormatLocaleDefinition = {
   decimal: '.',
   thousands: ',',
   grouping: [3],
-  currency: ['$', ''],
+  currency: ['₹', ''],
 };

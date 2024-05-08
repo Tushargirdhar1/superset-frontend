@@ -399,15 +399,38 @@ export default function MenuWrapper({ data, ...rest }: MenuProps) {
       newItem.childs = children;
     }
 
-    if (!settingsMenus.hasOwnProperty(item.name)) {
-      cleanedMenu.push(newItem);
-    } else {
-      settings.push(newItem);
+  //   if (!settingsMenus.hasOwnProperty(item.name)) {
+  //     cleanedMenu.push(newItem);
+  //   } else {
+  //     settings.push(newItem);
+  //   }
+  // });
+  if (!settingsMenus.hasOwnProperty(item.name)) {
+    cleanedMenu.push(newItem);
+  } else {
+    // Check if it's the Security menu
+    if (item.name === 'Security') {
+      // Filter out the "List Users" child from the Security menu
+      if (item.childs) {
+        newItem.childs = item.childs.filter(
+          (child: MenuObjectChildProps | string) => {
+            if (typeof child === 'string') {
+              return true; // Keep string children
+            } else {
+              // Check if it's an object (MenuObjectChildProps)
+              return (
+                (child as MenuObjectChildProps).label !== 'List Users'
+              );
+            }
+          }
+        );
+      }
     }
-  });
+    settings.push(newItem);
+  }
+});
 
   newMenuData.menu = cleanedMenu;
   newMenuData.settings = settings;
-
   return <Menu data={newMenuData} {...rest} />;
 }

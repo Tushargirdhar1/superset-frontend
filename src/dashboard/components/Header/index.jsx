@@ -656,7 +656,7 @@ class Header extends React.PureComponent {
                   {this.state.isFullScreen ? <FullscreenExitOutlined onClick={this.toggleFullScreen} /> : <FullscreenOutlined onClick={this.toggleFullScreen} />}
                   {/* { ? 'Exit Full Screen' : 'Enter Full Screen'}
                   </FullscreenOutlined> */}
-                  <ToggleThemeSwitch />
+                  <ToggleThemeSwitch forceRefreshAllCharts={this.forceRefresh}/>
 
                   {NavExtension && <NavExtension />}
                   {userCanEdit && (
