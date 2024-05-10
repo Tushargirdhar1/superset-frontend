@@ -179,6 +179,9 @@ export default function transformProps(
       }
     });
   }
+const themeMode = localStorage.getItem('themeMode') || 'light';
+const isDarkTheme = themeMode === 'dark';
+const blackThemeColor = isDarkTheme ? '#ffffff' : '#000000'; 
 
   const series: TreeSeriesOption[] = [
     {
@@ -187,6 +190,7 @@ export default function transformProps(
       label: {
         ...DEFAULT_TREE_SERIES_OPTION.label,
         position: nodeLabelPosition,
+        color:blackThemeColor,
       },
       emphasis: { focus: emphasis },
       animation: DEFAULT_TREE_SERIES_OPTION.animation,
@@ -195,7 +199,10 @@ export default function transformProps(
       symbol,
       roam,
       symbolSize,
-      lineStyle: DEFAULT_TREE_SERIES_OPTION.lineStyle,
+      lineStyle: {
+        ...DEFAULT_TREE_SERIES_OPTION.lineStyle,
+        color:blackThemeColor,
+      },
       select: DEFAULT_TREE_SERIES_OPTION.select,
       leaves: { label: { position: childLabelPosition } },
     },

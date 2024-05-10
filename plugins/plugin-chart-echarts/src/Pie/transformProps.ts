@@ -50,7 +50,6 @@ import { getDefaultTooltip } from '../utils/tooltip';
 import { Refs } from '../types';
 
 const percentFormatter = getNumberFormatter(NumberFormats.PERCENT_2_POINT);
-const themeMode = localStorage.getItem('themeMode') || 'light';
 
 export function formatPieLabel({
   params,
@@ -267,6 +266,8 @@ export default function transformProps(
       numberFormatter,
       labelType,
     });
+  
+  const themeMode = localStorage.getItem('themeMode');
 
   let defaultLabel;
   if (themeMode === 'dark') {

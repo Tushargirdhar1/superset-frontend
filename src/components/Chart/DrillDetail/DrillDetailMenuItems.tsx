@@ -193,7 +193,7 @@ const DrillDetailMenuItems = ({
   ) : (
     <>
       { onIcon ? (
-      <Tooltip title="Drill to Detail">
+      <Tooltip title={<span style={{color:'#000'}}>Drill to Detail</span>}color='#ffff'> 
         <DeliveredProcedureOutlined
           onClick={openModal.bind(null, [])}
           style={{

@@ -48,9 +48,6 @@ import {
   StackType,
 } from '../types';
 import { defaultLegendPadding } from '../defaults';
-const themeMode = localStorage.getItem('themeMode') || 'light';
-const isDarkTheme = themeMode === 'dark';
-const blackThemeColor = isDarkTheme ? '#ffffff' : '#000000'; 
 
 function isDefined<T>(value: T | undefined | null): boolean {
   return value !== undefined && value !== null;
@@ -521,7 +518,7 @@ export function dedupSeries(series: SeriesOption[]): SeriesOption[] {
     const count = counter.get(id) || 0;
     const suffix = count > 0 ? ` (${count})` : '';
     counter.set(id, count + 1);
-    row.label.color=blackThemeColor;
+    // row.label.color='#2684ba';
     return {
       ...row,
       id: `${id}${suffix}`,

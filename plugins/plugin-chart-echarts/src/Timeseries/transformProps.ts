@@ -615,23 +615,19 @@ export default function transformProps(
         ]
       : [],
   };
-
+  if (echartOptions.series && echartOptions.series.length > 0) {
+    echartOptions.series.forEach(series => {
+      if (series.type === 'bar' || series.type === 'line' || series.type === 'scatter' || series.type === 'smoothline' || series.type === 'area') {
+        series.label = {
+          ...series.label,
+          color: blackThemeColor,
+        };
+      }
+    });
+  }
   const onFocusedSeries = (seriesName: string | null) => {
     focusedSeries = seriesName;
   };
-  // if (echartOptions.series && echartOptions.series.length > 0) {
-  //   echartOptions.series.forEach(series => {
-  //     if (series.type === 'bar') {
-  //       // Adjust barWidth and label properties based on theme mode
-  //       // series.barWidth = themeMode === 'dark' ? '50%' : '20%'; // Example widths based on theme
-  //       series.label = {
-  //         ...series.label,
-  //         // fontSize: themeMode === 'dark' ? 10 : 12, // Adjust fontSize based on theme
-  //         color: themeMode === 'dark' ? 'white' : '#333333', // Adjust label color based on theme
-  //       };
-  //     }
-  //   });
-  // }
 
   return {
     echartOptions,

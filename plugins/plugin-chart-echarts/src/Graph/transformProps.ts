@@ -282,6 +282,9 @@ export default function transformProps(
   });
 
   const categoryList = [...categories];
+  const themeMode = localStorage.getItem('themeMode') || 'light';
+  const isDarkTheme = themeMode === 'dark';
+  const blackThemeColor = isDarkTheme ? '#ffffff' : '#000000'; 
 
   const series: GraphSeriesOption[] = [
     {
@@ -309,7 +312,10 @@ export default function transformProps(
       selectedMode,
       ...getChartPadding(showLegend, legendOrientation, legendMargin),
       animation: DEFAULT_GRAPH_SERIES_OPTION.animation,
-      label: DEFAULT_GRAPH_SERIES_OPTION.label,
+      label: {
+        ...DEFAULT_GRAPH_SERIES_OPTION.label,
+        color:blackThemeColor
+      },
       lineStyle: DEFAULT_GRAPH_SERIES_OPTION.lineStyle,
       emphasis: DEFAULT_GRAPH_SERIES_OPTION.emphasis,
     },
@@ -332,6 +338,7 @@ export default function transformProps(
     legend: {
       ...getLegendProps(legendType, legendOrientation, showLegend, theme),
       data: categoryList,
+      color:blackThemeColor,
     },
     series,
   };
